@@ -33,7 +33,7 @@ const Filter = () => {
     const [sortOrder, setSortOrder] = useState("asc");
     const [searchTerm, setSearchTerm] = useState("");
 
-    // a change in searchParams triggers the code  
+    // a change in searchParams triggers the code, array of dependencies is the trigger : [searchParams]  
     useEffect( () => {
 
         // http://localhost:xxxx?keyword=test&sortby=desc
@@ -48,7 +48,34 @@ const Filter = () => {
 
     }, [searchParams]);
 
+    // Search Term, array of dependencies is the trigger : [searchParams, searchTerm, navigate, pathname]
+
+        useEffect(() => { 
+            const handler = setTimeout(() => {
+                if (searchTerm) {
+                    searchParams.set("keyword", searchTerm);
+                } else {
+                    searchParams.delete("keyword");
+                }
+                navigate(`${pathname}?${searchParams.toString()}`);
+            }, 700);
+
+            return () => {
+                clearTimeout(handler);
+            };
+        }, [searchParams, searchTerm, navigate, pathname]);
+
     const handleCategoryChange = (event) => {
+
+        const selectedCategory = event.target.value;
+
+        if (selectedCategory === "all"){
+            params.delete("category")
+        } else {
+            params.set("category", selectedCategory)
+        }
+
+        navigate(`${pathname}?${params}`)
 
         setCategory(event.target.value);
 
@@ -73,6 +100,9 @@ const Filter = () => {
                 <input
                     type="text"
                     placeholder="Search Products"
+
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
 
                     className="border border-gray-400 text-slate-800 rounded-md py-2 pl-10 pr-4 w-full focus:outline-none focus:ring-2 focus:ring-[#1976d2]" />
 
