@@ -5,7 +5,11 @@ import Filter from "./Filter";
 import { FaExclamationTriangle } from "react-icons/fa";
 import { useEffect } from "react";
 import { fetchProducts } from "../store/actions";
+import useProductFilter from "./useProductFilter";
 
+   // http://localhost:xxxx?keyword=test&sortby=desc
+   // 1. Make sure url is updted with filter values
+   // 2. use this filter values for getting data from backend
 
 const Products = () => {
 
@@ -23,10 +27,13 @@ const Products = () => {
     )
 
     const dispatch = useDispatch();
+    useProductFilter();
 
-    useEffect(() => {
+    // not needed anymore
+    
+/*     useEffect(() => {
         dispatch(fetchProducts())
-    }, [dispatch]);
+    }, [dispatch]); */
 
 /*     const products = [
     {
