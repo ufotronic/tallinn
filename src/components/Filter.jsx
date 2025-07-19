@@ -3,15 +3,15 @@ import { useEffect, useState } from "react";
 import { FiArrowDown, FiArrowUp, FiRefreshCw, FiSearch } from "react-icons/fi";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
-const Filter = () => {
+const Filter = ({categories}) => {
 
-    const categories = [
-        {categoryid: 1, categoryName: "Electronics"},
-        {categoryid: 2, categoryName: "Clothing"},
-        {categoryid: 3, categoryName: "Furniture"},
-        {categoryid: 4, categoryName: "Books"},
-        {categoryid: 5, categoryName: "Toys"},
-    ];
+    // const categories = [
+    //     {categoryid: 1, categoryName: "Electronics"},
+    //     {categoryid: 2, categoryName: "Clothing"},
+    //     {categoryid: 3, categoryName: "Furniture"},
+    //     {categoryid: 4, categoryName: "Books"},
+    //     {categoryid: 5, categoryName: "Toys"},
+    // ];
 
 
     // Hooks

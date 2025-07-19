@@ -4,7 +4,7 @@ import Filter from "./Filter";
 
 import { FaExclamationTriangle } from "react-icons/fa";
 import { useEffect } from "react";
-import { fetchProducts } from "../store/actions";
+import { fetchProducts, fetchCategories } from "../store/actions";
 import useProductFilter from "./useProductFilter";
 
    // http://localhost:xxxx?keyword=test&sortby=desc
@@ -22,12 +22,16 @@ const Products = () => {
     //const errorMessage = "";
 
     // get Access to the Reux Store
-    const {products} = useSelector(
+    const {products, categories} = useSelector(
         (state) => state.products
     )
 
     const dispatch = useDispatch();
     useProductFilter();
+
+     useEffect(() => {
+        dispatch(fetchCategories())
+    }, [dispatch]);
 
     // not needed anymore
     
@@ -60,7 +64,7 @@ const Products = () => {
 
     return (
         <div className="lg:px-14 sm:px-8 px-4 py-14 2xl:w-[90%] 2xl:mx-auto">
-            <Filter />
+            <Filter categories={categories ? categories :  []} />
 
             {isLoading ? (
                 // <Loader />
