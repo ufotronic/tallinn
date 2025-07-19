@@ -7,6 +7,8 @@ import { useEffect } from "react";
 import { fetchProducts, fetchCategories } from "../store/actions";
 import useProductFilter from "./useProductFilter";
 
+import Loader from "./shared/Loader";
+
    // http://localhost:xxxx?keyword=test&sortby=desc
    // 1. Make sure url is updted with filter values
    // 2. use this filter values for getting data from backend
@@ -66,9 +68,11 @@ const Products = () => {
         <div className="lg:px-14 sm:px-8 px-4 py-14 2xl:w-[90%] 2xl:mx-auto">
             <Filter categories={categories ? categories :  []} />
 
-            {isLoading ? (
+
+            {/* { true  ? ( */}
+            { isLoading  ? ( 
                 // <Loader />
-                <p>Loading</p>
+                    <Loader text = { "Fck You !!!" }/>
             ) : errorMessage ? (
                 <div className="flex justify-center items-center h-[200px]">
                     <FaExclamationTriangle className="text-slate-800 text-3xl mr-2"/>
