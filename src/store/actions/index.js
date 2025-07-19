@@ -57,7 +57,7 @@ export const fetchCategories = () => async (dispatch) => {
 
         });
 
-        dispatch({type: "CATEGORY_SUCCESS"});
+        dispatch({type: "IS_ERROR"});
     
     } catch (error) {
 
